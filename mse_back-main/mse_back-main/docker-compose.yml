@@ -1,0 +1,50 @@
+version: '3'
+services:
+  node:
+    image: node:16
+    container_name: node
+    restart: always
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    command: npm run dev
+    environment:
+      NODE_ENV: dev
+    ports:
+      - 4000:8000
+    networks:
+      - app-network
+  # app:
+  #   container_name: docker-node-mongo
+  #   restart: always
+  #   build: .
+  #   ports:
+  #     - '80:3000'
+  #   external_links:
+  #     - mongo
+  mongo:
+    restart: always
+    container_name: mongo
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: back_amir
+      MONGO_INITDB_ROOT_PASSWORD: H3sz7GrqmXCZEY3x
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+    depends_on:
+      - node
+    networks:
+      - app-network
+ 
+networks:
+  app-network:
+    driver: bridge 
+volumes:
+  db_data:
+    driver: local     

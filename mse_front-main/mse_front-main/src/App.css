@@ -1,0 +1,21 @@
+
+.container{
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+table.unstyledTable {
+  width: 80%;
+
+}
+table.unstyledTable ,table.unstyledTable td, table.unstyledTable th {
+  border: 3px solid black;
+border-collapse: collapse;
+
+
+}
+
+table.unstyledTable tbody td {
+font-size: 20px;
+padding: 5px;
+}
